@@ -9,6 +9,35 @@ describe('frames2string', function () {
   var exampleFrame3 = "";
   var exampleFrame4 = "YER";
 
+  describe('input params', function () {
+    it("should revert to the default seperator if the second param is not a string", function (done) {
+      var correct = "All I want to do is rock with the rest of the world";
+      var result = frames2string([exampleFrame1, exampleFrame2], { 'well this is an': 'object' });
+      expect(result).to.be.equal(correct);
+      done();
+    });
+
+    it("should return an exmpty string if the first param is not an array", function (done) {
+      var result = frames2string(Date.now());
+      expect(result).to.be.equal("");
+      done();
+    });
+
+    it("should return an exmpty string if the first param is missing", function (done) {
+      var result;
+      result = frames2string();
+      expect(result).to.be.equal("");
+
+      result = frames2string(null);
+      expect(result).to.be.equal("");
+
+      result = frames2string(undefined);
+      expect(result).to.be.equal("");
+
+      done();
+    });
+  });
+
   describe('with non-live text', function () {
     it("should just return the string if only one item in array", function (done) {
       var result = frames2string([exampleFrame1]);

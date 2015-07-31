@@ -1,7 +1,11 @@
 var main = function (array, joinString) {
-  if (typeof joinString === 'undefined') {
+  if (typeof joinString !== 'string') {
     joinString = ' ';
   }
+  if (Object.prototype.toString.call(array) !== '[object Array]') {
+    return "";
+  }
+
   var myReturn = array.reduce(function (p, c) {
     if (c.length > 0) {
       var oll = OverlapLength(p, c);
